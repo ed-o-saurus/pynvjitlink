@@ -60,12 +60,24 @@ class LinkableCode:
 class PTXSource(LinkableCode):
     """PTX Source code in memory"""
 
+    def __init__(self, data, name=None):
+        if isinstance(data, str):
+            super().__init__(data.encode(), name)
+        else:
+            super().__init__(data, name)
+
     kind = FILE_EXTENSION_MAP["ptx"]
     default_name = "<unnamed-ptx>"
 
 
 class CUSource(LinkableCode):
     """CUDA C/C++ Source code in memory"""
+
+    def __init__(self, data, name=None):
+        if isinstance(data, str):
+            super().__init__(data.encode(), name)
+        else:
+            super().__init__(data, name)
 
     kind = "cu"
     default_name = "<unnamed-cu>"
